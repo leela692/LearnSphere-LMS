@@ -1,0 +1,122 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>LearnSphere LMS</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial;
+            background: #f1f5f9;
+        }
+
+        header {
+            background: #173b70;
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+
+        nav {
+            background: #102b50;
+            padding: 15px;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            margin: 15px;
+            text-decoration: none;
+        }
+
+        .welcome {
+            text-align: center;
+            padding: 40px;
+        }
+
+        .courses {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            width: 200px;
+            text-align: center;
+            border-radius: 10px;
+        }
+
+        button {
+            background: #1769aa;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>LearnSphere</h1>
+    <p>Online Learning Management System</p>
+</header>
+
+<nav>
+    <a href="/">Home</a>
+    <a href="#courses">Courses</a>
+    <a href="#about">About</a>
+</nav>
+
+<div class="welcome">
+    <h2>Welcome to LearnSphere!</h2>
+    <p>Learn Anytime, Anywhere.</p>
+    <h2>Our Available Courses</h2>
+</div>
+
+<div class="courses" id="courses">
+
+    <div class="card">
+        <h3>Java Programming</h3>
+        <p>Learn Java Basics</p>
+        <button>Explore</button>
+    </div>
+
+    <div class="card">
+        <h3>Python</h3>
+        <p>Learn Python Programming</p>
+        <button>Explore</button>
+    </div>
+
+    <div class="card">
+        <h3>Machine Learning</h3>
+        <p>Learn AI and ML</p>
+        <button>Explore</button>
+    </div>
+
+    <div class="card">
+        <h3>Web Development</h3>
+        <p>Learn HTML and CSS</p>
+        <button>Explore</button>
+    </div>
+
+    <div class="card">
+        <h3>DevOps</h3>
+        <p>Learn DevOps Tools</p>
+        <button>Explore</button>
+    </div>
+
+</div>
+
+<div class="welcome" id="about">
+    <h2>About LearnSphere</h2>
+    <p>A platform connecting students and instructors.</p>
+</div>
+
+</body>
+</html>
