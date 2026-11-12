@@ -28,6 +28,11 @@
             color: white;
             margin: 15px;
             text-decoration: none;
+            cursor: pointer;
+        }
+
+        nav a:hover {
+            color: #8ecaff;
         }
 
         .welcome {
@@ -40,6 +45,7 @@
             justify-content: center;
             flex-wrap: wrap;
             gap: 20px;
+            padding: 20px;
         }
 
         .card {
@@ -48,14 +54,84 @@
             width: 200px;
             text-align: center;
             border-radius: 10px;
+            box-shadow: 0 2px 8px #00000015;
         }
 
         button {
             background: #1769aa;
             color: white;
             border: none;
-            padding: 10px;
+            padding: 10px 18px;
             border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #102b50;
+        }
+
+        .details, .registration {
+            background: white;
+            max-width: 650px;
+            margin: 30px auto;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px #00000015;
+        }
+
+        .details h2, .registration h2 {
+            color: #173b70;
+        }
+
+        .details li {
+            margin: 12px 0;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0 18px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        .success {
+            color: green;
+            text-align: center;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        .back {
+            margin-top: 15px;
+            background: #555;
+        }
+
+        footer {
+            background: #102b50;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            margin-top: 30px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 600px) {
+            .details, .registration {
+                margin: 15px;
+            }
+
+            nav a {
+                margin: 7px;
+            }
         }
     </style>
 </head>
@@ -68,55 +144,300 @@
 </header>
 
 <nav>
-    <a href="/">Home</a>
-    <a href="#courses">Courses</a>
-    <a href="#about">About</a>
+    <a onclick="showHome()">Home</a>
+    <a onclick="showCourses()">Courses</a>
+    <a onclick="showAbout()">About</a>
 </nav>
 
-<div class="welcome">
-    <h2>Welcome to LearnSphere!</h2>
-    <p>Learn Anytime, Anywhere.</p>
-    <h2>Our Available Courses</h2>
+<!-- HOME PAGE -->
+<div id="homePage">
+
+    <div class="welcome">
+        <h2>Welcome to LearnSphere!</h2>
+        <p>Learn Anytime, Anywhere.</p>
+        <h2>Our Available Courses</h2>
+    </div>
+
+    <div class="courses" id="courses">
+
+        <div class="card">
+            <h3>Java Programming</h3>
+            <p>Learn Java Basics</p>
+            <button onclick="openCourse('Java Programming')">
+                Explore
+            </button>
+        </div>
+
+        <div class="card">
+            <h3>Python</h3>
+            <p>Learn Python Programming</p>
+            <button onclick="openCourse('Python')">
+                Explore
+            </button>
+        </div>
+
+        <div class="card">
+            <h3>Machine Learning</h3>
+            <p>Learn AI and ML</p>
+            <button onclick="openCourse('Machine Learning')">
+                Explore
+            </button>
+        </div>
+
+        <div class="card">
+            <h3>Web Development</h3>
+            <p>Learn HTML and CSS</p>
+            <button onclick="openCourse('Web Development')">
+                Explore
+            </button>
+        </div>
+
+        <div class="card">
+            <h3>DevOps</h3>
+            <p>Learn DevOps Tools</p>
+            <button onclick="openCourse('DevOps')">
+                Explore
+            </button>
+        </div>
+
+    </div>
+
+    <div class="welcome" id="about">
+        <h2>About LearnSphere</h2>
+        <p>A platform connecting students and instructors.</p>
+    </div>
+
 </div>
 
-<div class="courses" id="courses">
+<!-- COURSE DETAILS PAGE -->
+<div id="coursePage" class="hidden">
 
-    <div class="card">
-        <h3>Java Programming</h3>
-        <p>Learn Java Basics</p>
-        <button>Explore</button>
-    </div>
+    <div class="details">
 
-    <div class="card">
-        <h3>Python</h3>
-        <p>Learn Python Programming</p>
-        <button>Explore</button>
-    </div>
+        <h2 id="courseTitle"></h2>
 
-    <div class="card">
-        <h3>Machine Learning</h3>
-        <p>Learn AI and ML</p>
-        <button>Explore</button>
-    </div>
+        <p id="courseDescription"></p>
 
-    <div class="card">
-        <h3>Web Development</h3>
-        <p>Learn HTML and CSS</p>
-        <button>Explore</button>
-    </div>
+        <h3>What You Will Learn</h3>
 
-    <div class="card">
-        <h3>DevOps</h3>
-        <p>Learn DevOps Tools</p>
-        <button>Explore</button>
+        <ul id="courseTopics"></ul>
+
+        <h3>Course Duration</h3>
+        <p id="courseDuration"></p>
+
+        <button onclick="openRegistration()">
+            Enroll Now
+        </button>
+
+        <br>
+
+        <button class="back" onclick="showCourses()">
+            Back to Courses
+        </button>
+
     </div>
 
 </div>
 
-<div class="welcome" id="about">
-    <h2>About LearnSphere</h2>
-    <p>A platform connecting students and instructors.</p>
+<!-- STUDENT REGISTRATION PAGE -->
+<div id="registrationPage" class="hidden">
+
+    <div class="registration">
+
+        <h2>Student Registration Form</h2>
+
+        <form id="registrationForm">
+
+            <label>Student Name</label>
+            <input type="text" id="studentName"
+                   placeholder="Enter your name" required>
+
+            <label>Email Address</label>
+            <input type="email" id="studentEmail"
+                   placeholder="Enter your email" required>
+
+            <label>Phone Number</label>
+            <input type="tel" id="studentPhone"
+                   placeholder="Enter your phone number"
+                   pattern="[0-9]{10}"
+                   title="Enter a 10-digit phone number"
+                   required>
+
+            <label>Select Course</label>
+            <select id="selectedCourse" required>
+                <option value="">Select a Course</option>
+                <option>Java Programming</option>
+                <option>Python</option>
+                <option>Machine Learning</option>
+                <option>Web Development</option>
+                <option>DevOps</option>
+            </select>
+
+            <button type="submit">
+                Submit Registration
+            </button>
+
+        </form>
+
+        <p id="successMessage" class="success"></p>
+
+        <button class="back" onclick="showCourses()">
+            Back to Courses
+        </button>
+
+    </div>
+
 </div>
+
+<footer>
+    <p>LearnSphere - Online Learning Management System</p>
+</footer>
+
+<script>
+
+    let currentCourse = "";
+
+    const courseData = {
+
+        "Java Programming": {
+            description: "Learn Java programming from basics to object-oriented programming concepts.",
+            topics: [
+                "Introduction to Java",
+                "Variables and Data Types",
+                "Control Statements",
+                "Classes and Objects",
+                "Inheritance and Polymorphism"
+            ],
+            duration: "8 Weeks"
+        },
+
+        "Python": {
+            description: "Learn Python programming and develop basic programming skills.",
+            topics: [
+                "Introduction to Python",
+                "Variables and Data Types",
+                "Conditional Statements",
+                "Loops and Functions",
+                "Lists and Dictionaries"
+            ],
+            duration: "6 Weeks"
+        },
+
+        "Machine Learning": {
+            description: "Understand the basics of Artificial Intelligence and Machine Learning.",
+            topics: [
+                "Introduction to AI and ML",
+                "Types of Machine Learning",
+                "Data Preprocessing",
+                "Supervised Learning",
+                "Model Evaluation"
+            ],
+            duration: "10 Weeks"
+        },
+
+        "Web Development": {
+            description: "Learn to create websites using frontend web technologies.",
+            topics: [
+                "Introduction to HTML",
+                "HTML Forms and Tables",
+                "CSS Basics",
+                "CSS Styling",
+                "Website Design"
+            ],
+            duration: "8 Weeks"
+        },
+
+        "DevOps": {
+            description: "Understand DevOps concepts and commonly used development tools.",
+            topics: [
+                "Introduction to DevOps",
+                "Git and GitHub",
+                "Jenkins Basics",
+                "Docker Fundamentals",
+                "CI/CD Pipeline"
+            ],
+            duration: "8 Weeks"
+        }
+
+    };
+
+    function hideAllPages() {
+        document.getElementById("homePage").classList.add("hidden");
+        document.getElementById("coursePage").classList.add("hidden");
+        document.getElementById("registrationPage").classList.add("hidden");
+    }
+
+    function showHome() {
+        hideAllPages();
+        document.getElementById("homePage").classList.remove("hidden");
+        window.scrollTo(0, 0);
+    }
+
+    function showCourses() {
+        hideAllPages();
+        document.getElementById("homePage").classList.remove("hidden");
+        document.getElementById("courses").scrollIntoView();
+    }
+
+    function showAbout() {
+        hideAllPages();
+        document.getElementById("homePage").classList.remove("hidden");
+        document.getElementById("about").scrollIntoView();
+    }
+
+    function openCourse(courseName) {
+
+        currentCourse = courseName;
+
+        const course = courseData[courseName];
+
+        document.getElementById("courseTitle").textContent = courseName;
+        document.getElementById("courseDescription").textContent = course.description;
+        document.getElementById("courseDuration").textContent = course.duration;
+
+        const topicsList = document.getElementById("courseTopics");
+        topicsList.innerHTML = "";
+
+        course.topics.forEach(function(topic) {
+            const li = document.createElement("li");
+            li.textContent = topic;
+            topicsList.appendChild(li);
+        });
+
+        hideAllPages();
+        document.getElementById("coursePage").classList.remove("hidden");
+
+        window.scrollTo(0, 0);
+    }
+
+    function openRegistration() {
+
+        hideAllPages();
+
+        document.getElementById("registrationPage").classList.remove("hidden");
+
+        document.getElementById("selectedCourse").value = currentCourse;
+
+        document.getElementById("successMessage").textContent = "";
+
+        window.scrollTo(0, 0);
+    }
+
+    document.getElementById("registrationForm").addEventListener("submit", function(event) {
+
+        event.preventDefault();
+
+        const name = document.getElementById("studentName").value;
+
+        document.getElementById("successMessage").textContent =
+            "Registration submitted successfully! Welcome to LearnSphere, " + name + "!";
+
+        document.getElementById("registrationForm").reset();
+
+    });
+
+</script>
 
 </body>
 </html>
+
